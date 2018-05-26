@@ -3,7 +3,7 @@ This script allows you to resolve your Hetzner Cloud server names via DNS.
 __Installation and Usage:__<br>
 1. Clone this repository
 1. Run 'sudo add-apt-repository ppa:ondrej/php' to get access to required (newer) PHP versions
-1. Run 'sudo apt install composer php-zip' to install binary dependencies
+1. Run 'sudo apt install composer php-zip php-curl' to install binary dependencies
 1. Run 'composer install' to install PHP dependencies
 1. Run 'sudo php index.php --bind=0.0.0.0 --apikey=XXXXXXXXXXXXX'
 
