@@ -2,11 +2,12 @@
 require "vendor/autoload.php";
 
 $options = getopt(null, ["bind:", "apikey:"]);
-var_dump($options);
 
-$hetznerCloudResolver = new HetznerCloudResolver();
+if (sizeof($options) != 2) {
+    die("Hetzner Cloud DNS: wrong arguments. Use --apikey= and --bind=" . PHP_EOL);
+}
 
+$hetznerCloudResolver = new HetznerCloudResolver($options['apikey']);
 
-echo 'dns server starting on interface ' . $bindAddress . PHP_EOL;
-$dns = new yswery\DNS\Server($lxdSocketResolver, $bindAddress);
+$dns = new yswery\DNS\Server($hetznerCloudResolver, $options['bind']);
 $dns->start();

@@ -1,77 +1,85 @@
 <?php
-use yswery\DNS\AbstractStorageProvider;
 
-class HetznerCloudResolver extends AbstractStorageProvider
+class HetznerCloudResolver implements \yswery\DNS\ResolverInterface
 {
-	private static $TYPE_A = 1;
-	private static $TYPE_AAAA = 28;
+    private static $TYPE_A = 1;
+    private static $TYPE_AAAA = 28;
+    private static $API_BASE_URL = 'https://api.hetzner.cloud/v1/';
 
-	public function get_answer($question)
-	{
-		$hostname = rtrim($question[0]['qname'], '.');
+    private $apiKey;
 
-		$hostname = str_replace('.lxd', '', $hostname);
+    public function __construct(string $apiKey)
+    {
+        $this->apiKey = $apiKey;
+    }
 
-		$data = $this->loadContainerData($hostname);
+    public function getAnswer(array $query)
+    {
+        $query[0]['qname'] = rtrim($query[0]['qname'], '.');
 
-		if ($data == null || $data->type === 'error' || $data->metadata->status !== 'Running') {
-			return [];
-		}
+        $result = [];
 
-		$addressFamily = '';
-		switch ($question[0]['qtype']) {
-			case self::$TYPE_A:
-				$addressFamily = 'inet';
-				break;
-			case self::$TYPE_AAAA:
-				$addressFamily = 'inet6';
-				break;
-		}
+        foreach ($this->apiCall('servers')->servers as $server) {
+            if ($server->name == $query[0]['qname']) {
 
-		$records = [];
-		foreach ($data->metadata->network->eth0->addresses as $address) {
-			if ($address->family === $addressFamily
-				&& $address->scope === 'global'
-			) {
-				$records[] = [
-					'name' => $question[0]['qname'],
-					'class' => $question[0]['qclass'],
-					'ttl' => 0,
-					'data' => [
-						'type' => $question[0]['qtype'],
-						'value' => $address->address
-					]
-				];
-			}
-		}
+                if ($query[0]['qtype'] == self::$TYPE_A) {
+                    $result[] = $server->public_net->ipv4->ip;
+                }
 
-		return $records;
-	}
+                else if ($query[0]['qtype'] == self::$TYPE_AAAA) {
+                    // first, use IPv6 rDNS config for name resolution
+                    foreach ($server->public_net->ipv6->dns_ptr as $address) {
+                        if ($address->dns_ptr == $query[0]['qname']) {
+                            $result[] = $address->ip;
+                        }
+                    }
 
-	private function loadContainerData($hostname)
-	{
-		$url = "/1.0/containers/$hostname/state";
+                    // if rDNS had no result, use the default /64 block and return the first address
+                    if (empty($result)) {
+                        $result[] = str_replace('::/64', '::1', $server->public_net->ipv6->ip);
+                    }
+                }
+            }
+        }
 
-		$fp = fsockopen("unix:///var/lib/lxd/unix.socket");
-		if (!$fp) {
-			echo 'error!';
-		} else {
-			$out = "GET $url HTTP/1.1\r\n";
-			$out .= "Host: localhost\r\n";
-			$out .= "Connection: Close\r\n\r\n";
-			fwrite($fp, $out);
-			$responseJson = '';
-			while (!feof($fp)) {
-				$rawResponse = fgets($fp, 20000);
-				if (substr($rawResponse, 0, 1) === '{') {
-					$responseJson = $rawResponse;
-					break;
-				}
-			}
-			fclose($fp);
+        $return = [];
+        foreach ($result as $address) {
+            $return[] = [
+                'name' => $query[0]['qname'],
+                'class' => $query[0]['qclass'],
+                'ttl' => 0,
+                'data' => [
+                    'type' => $query[0]['qtype'],
+                    'value' => $address
+                ]
+            ];
 
-			$response = json_decode($responseJson);
-			return $response;
-		}
-	}
+
+        }
+        return $return;
+    }
+
+    private function apiCall($url)
+    {
+        $ch = curl_init();
+        $headers = array('Authorization: Bearer ' . $this->apiKey);
+
+        curl_setopt($ch, CURLOPT_URL, self::$API_BASE_URL . $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($result);
+    }
+
+    public function allowsRecursion()
+    {
+        return false;
+    }
+
+    public function isAuthority($domain)
+    {
+        return true;
+    }
 }
