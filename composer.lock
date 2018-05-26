@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "26cdb9c74a24c88396f3e216826b9be8",
+    "hash": "ffe2d67d9824e8784784beaef91605aa",
+    "content-hash": "08225a2662112ab663e874bdfe11a85b",
     "packages": [
         {
             "name": "yswery/dns",
@@ -54,7 +55,7 @@
                 }
             ],
             "description": "A DNS server implementation in pure PHP.",
-            "time": "2018-05-17T03:42:05+00:00"
+            "time": "2018-05-17 03:42:05"
         }
     ],
     "packages-dev": [
@@ -110,7 +111,7 @@
                 "bundle dependencies",
                 "executable phar"
             ],
-            "time": "2015-11-15T18:36:37+00:00"
+            "time": "2015-11-15 18:36:37"
         },
         {
             "name": "doctrine/inflector",
@@ -177,7 +178,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2018-01-09T20:05:19+00:00"
+            "time": "2018-01-09 20:05:19"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -242,7 +243,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2018-04-22T15:46:56+00:00"
+            "time": "2018-04-22 15:46:56"
         },
         {
             "name": "guzzlehttp/promises",
@@ -293,7 +294,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-12-20T10:07:11+00:00"
+            "time": "2016-12-20 10:07:11"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -358,7 +359,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-03-20T17:10:46+00:00"
+            "time": "2017-03-20 17:10:46"
         },
         {
             "name": "herrera-io/box",
@@ -418,7 +419,7 @@
             "keywords": [
                 "phar"
             ],
-            "time": "2014-12-03T23:26:45+00:00"
+            "time": "2014-12-03 23:26:45"
         },
         {
             "name": "knplabs/packagist-api",
@@ -470,7 +471,7 @@
                 "composer",
                 "packagist"
             ],
-            "time": "2018-01-19T08:15:53+00:00"
+            "time": "2018-01-19 08:15:53"
         },
         {
             "name": "phine/exception",
@@ -520,7 +521,7 @@
                 "exception"
             ],
             "abandoned": true,
-            "time": "2013-08-27T17:43:25+00:00"
+            "time": "2013-08-27 17:43:25"
         },
         {
             "name": "phine/path",
@@ -573,7 +574,7 @@
                 "system"
             ],
             "abandoned": true,
-            "time": "2013-10-15T22:58:04+00:00"
+            "time": "2013-10-15 22:58:04"
         },
         {
             "name": "psr/http-message",
@@ -623,7 +624,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "psr/log",
@@ -670,11 +671,11 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10T12:19:37+00:00"
+            "time": "2016-10-10 12:19:37"
         },
         {
             "name": "symfony/console",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -731,7 +732,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-15T21:17:45+00:00"
+            "time": "2018-05-15 21:17:45"
         },
         {
             "name": "symfony/debug",
@@ -788,11 +789,11 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-30T07:22:48+00:00"
+            "time": "2016-07-30 07:22:48"
         },
         {
             "name": "symfony/finder",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -837,7 +838,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-15T21:17:45+00:00"
+            "time": "2018-05-15 21:17:45"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -896,11 +897,11 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-04-26T10:06:28+00:00"
+            "time": "2018-04-26 10:06:28"
         },
         {
             "name": "symfony/process",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -945,7 +946,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-15T21:17:45+00:00"
+            "time": "2018-05-15 21:17:45"
         },
         {
             "name": "tedivm/jshrink",
@@ -991,7 +992,7 @@
                 "javascript",
                 "minifier"
             ],
-            "time": "2017-12-08T00:59:56+00:00"
+            "time": "2017-12-08 00:59:56"
         }
     ],
     "aliases": [],
@@ -1001,6 +1002,10 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=7.1",
+        "ext-zip": "*",
+        "ext-curl": "*"
+    },
     "platform-dev": []
 }

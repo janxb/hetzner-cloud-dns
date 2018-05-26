@@ -3,6 +3,9 @@
     "type": "project",
     "license": "MIT",
     "require": {
+	"php": ">=7.1",
+	"ext-zip": "*",
+	"ext-curl": "*",
         "yswery/dns": "dev-master"
     },
     "require-dev": {
