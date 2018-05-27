@@ -1,19 +1,18 @@
 {
-    "name": "janxb/hetzner-cloud-dns",
-    "type": "project",
-    "license": "MIT",
-    "require": {
-	"php": ">=7.1",
-	"ext-zip": "*",
-	"ext-curl": "*",
-        "yswery/dns": "dev-master"
-    },
-    "require-dev": {
-        "clue/phar-composer": "^1.0"
-    },
-    "autoload": {
-        "psr-0": {
-            "": "src/"
-        }
+  "name": "janxb/hetzner-cloud-dns",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.1",
+    "yswery/dns": "dev-master",
+    "lkdevelopment/hetzner-cloud-php-sdk": "^0.0.10"
+  },
+  "require-dev": {
+    "clue/phar-composer": "^1.0"
+  },
+  "autoload": {
+    "psr-0": {
+      "": "src/"
     }
+  }
 }
